@@ -5,11 +5,20 @@
 		<script type="text/javascript" src="../three.min.js" ></script>
 		<script type="text/javascript" src="../MTLLoader.js" ></script>
 		<script type="text/javascript" src="../OBJLoader.js" ></script>
-		<script type="text/javascript" src="../KeyboardState.js"></script>
-		<script type="text/javascript" src="demo.js" ></script>
 	</head>
-	<body style="text-align:center;">
-		<span style="position:absolute;top:0px;left:0px;"><input type="button" value="Toggle Wireframe" onclick="mesh.material.wireframe=!mesh.material.wireframe;meshFloor.material.wireframe=!meshFloor.material.wireframe;"/><br/>WASD to move.<br/>Arrow keys to turn.</span>
+	<body style="text-align:center; background-color: blue;">
+		<div>
+			<div id="tombol">
+				<button class="button" onclick="setup()" style="text-align: left;">Start</button>
+			</div>
+			<div id="canvas">
+				<div id="score1" style="float: left; margin-left:50px;">0</div>
+				<div id="tengah"><script type="text/javascript" src="demo.js"></script></div>
+				<div id="score2" style="float: right; margin-right:50px;">0</div>
+			</div>
+		</div>
+		<div id="winner">Test</div>
+
 	</body>
 </html>
 

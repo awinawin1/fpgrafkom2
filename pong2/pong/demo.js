@@ -1,39 +1,39 @@
 var scene, camera, renderer, mesh;
 var meshFloor, ambientLight, light;
-var paddle1;
+var paddle1, paddle2;
 var crate, crateTexture, crateNormalMap, crateBumpMap;
 
 var speed = 0.15, ballDirX = 1, ballDirZ = 1;
-var score1 = 0, score2 = 0;
+var score1 = 0, score2 = 0, maxscore = 3;
+
 
 window.addEventListener('keyup', function(event) { Key.onKeyup(event); }, false);
 window.addEventListener('keydown', function(event) { Key.onKeydown(event); }, false);
 
 var Key = {
-  _pressed: {},
+_pressed: {},
 
-  A: 65,
-  W: 87,
-  D: 68,
-  S: 83,
-  J: 74,
-  L: 76,
-  SPACE: 32,
-  
-  isDown: function(keyCode) {
-    return this._pressed[keyCode];
-  },
-  
-  onKeydown: function(event) {
-    this._pressed[event.keyCode] = true;
-  },
-  
-  onKeyup: function(event) {
-    delete this._pressed[event.keyCode];
-  }
+A: 65,
+W: 87,
+D: 68,
+S: 83,
+J: 74,
+L: 76,
+SPACE: 32,
+
+isDown: function(keyCode) {
+	return this._pressed[keyCode];
+},
+
+onKeydown: function(event) {
+	this._pressed[event.keyCode] = true;
+},
+
+onKeyup: function(event) {
+	delete this._pressed[event.keyCode];
+}
 };
 
-var clock = new THREE.Clock();
 var player = { height:1.8, speed:0.2, turnSpeed:Math.PI*0.02 };
 var USE_WIREFRAME = false;
 
@@ -72,6 +72,10 @@ var models = {
 // Meshes index
 var meshes = {};
 
+function setup(){
+	init();
+	// animate();
+}
 
 function init(){
 	scene = new THREE.Scene();
@@ -213,7 +217,7 @@ function init(){
 	camera.lookAt(new THREE.Vector3(0,player.height,0));
 	
 	renderer = new THREE.WebGLRenderer();
-	renderer.setSize(1280, 720);
+	renderer.setSize(1024, 576);
 
 	renderer.shadowMap.enabled = true;
 	renderer.shadowMap.type = THREE.BasicShadowMap;
@@ -309,7 +313,7 @@ function animate(){
 }
 
 function paddlemove(){
-	var moveDistance = 5 * clock.getDelta();
+	var moveDistance = 0.07;
 	if (Key.isDown(Key.D)){
 		if(paddle1.position.z > -6.85){
 			paddle1.translateZ(-moveDistance);
@@ -333,18 +337,12 @@ function paddlemove(){
 }
 
 function ballmove(){
-	// ball.position.x = 4;
-	// ball.position.z = -4.5;
-
 	if (ball.position.z > -2.75){
 		ballDirZ = -ballDirZ;
 	}
 	if (ball.position.z < -7.2){
 		ballDirZ = -ballDirZ;
 	}
-	
-	ball.position.x += ballDirX * speed;
-	ball.position.z += ballDirZ * speed;
 
 	if(ballDirX > speed * 2){
 		ballDirX = speed * 2;
@@ -353,26 +351,55 @@ function ballmove(){
 	if(ballDirZ > speed * 2){
 		ballDirZ = speed * 2;
 	}
+
+
+	ball.position.x += ballDirX * speed;
+	ball.position.z += ballDirZ * speed;
+
+	if (ball.position.x < -8){
+		resetball()
+		score1++;
+		document.getElementById("score1").innerHTML = score1;
+		checkscore();
+	}
+	if (ball.position.x > 6){
+		resetball();
+		score2++;
+		document.getElementById("score2").innerHTML = score2;
+		checkscore();
+	}
+
 }
 
 function paddleball(){
-
 	if (ball.position.x <= paddle1.position.x && ball.position.x >= paddle1.position.x - 0.5){
-		if (ball.position.z <= paddle1.position.z + 0.5 && ball.position.z >= paddle1.position.z - 0.5){	
+		if (ball.position.z <= paddle1.position.z + 0.6 && ball.position.z >= paddle1.position.z - 0.6){	
 			ballDirX = -ballDirX;
-			ballDirZ -= paddle1DirZ * 0.7;
 		}
 	}
 
-	if (ball.position.x <= paddle2.position.x && ball.position.x >= paddle2.position.x - 0.5){
-		if (ball.position.z <= paddle2.position.z + 0.5 && ball.position.z >= paddle2.position.z - 0.5){	
+	if (ball.position.x <= paddle2.position.x + 0.5 && ball.position.x >= paddle2.position.x){
+		if (ball.position.z <= paddle2.position.z + 0.6 && ball.position.z >= paddle2.position.z - 0.6){	
 			ballDirX = -ballDirX;
-			ballDirZ -= paddle2DirZ * 0.7;
 		}
 	}
 }
 
-function reset
+function resetball(){
+	ball.position.x = -1.3;
+	ball.position.z = -5;
+	ballDirZ = 1;
+	ballDirX = -ballDirX;
+}
 
-window.onload = init;
+function checkscore(){
+	if (score1 >= maxscore){
+		speed = 0;
+		document.getElementById("winner").innerHTML = "Player 1 Wins!";
+	}
+	else if(score2 >= maxscore){
+		speed = 0;
+		document.getElementById("winner").innerHTML = "Player 2 Wins";
+	}
+}
 
