@@ -1,9 +1,39 @@
 var scene, camera, renderer, mesh;
 var meshFloor, ambientLight, light;
-
+var paddle1;
 var crate, crateTexture, crateNormalMap, crateBumpMap;
 
-var keyboard = {};
+var speed = 0.15, ballDirX = 1, ballDirZ = 1;
+
+window.addEventListener('keyup', function(event) { Key.onKeyup(event); }, false);
+window.addEventListener('keydown', function(event) { Key.onKeydown(event); }, false);
+
+var Key = {
+  _pressed: {},
+
+  A: 65,
+  W: 87,
+  D: 68,
+  S: 83,
+  J: 74,
+  L: 76,
+  SPACE: 32,
+  
+  isDown: function(keyCode) {
+    return this._pressed[keyCode];
+  },
+  
+  onKeydown: function(event) {
+    this._pressed[event.keyCode] = true;
+  },
+  
+  onKeyup: function(event) {
+    delete this._pressed[event.keyCode];
+  }
+};
+
+
+var clock = new THREE.Clock();
 var player = { height:1.8, speed:0.2, turnSpeed:Math.PI*0.02 };
 var USE_WIREFRAME = false;
 
@@ -100,7 +130,7 @@ function init(){
 	crateNormalMap = textureLoader.load("crate0/crate0_normal.jpg");
 	
 	crate = new THREE.Mesh(
-		new THREE.BoxGeometry(7,2,4),
+		new THREE.BoxGeometry(12,2,5),
 		new THREE.MeshPhongMaterial({
 			color:0xffffff,
 			map:crateTexture,
@@ -121,7 +151,7 @@ function init(){
 		})
 	);
 	scene.add(paddle1);
-	paddle1.position.set(2, 2.2, -5);
+	paddle1.position.set(4.5, 2.2, -5);
 
 
 	paddle2 = new THREE.Mesh(
@@ -132,7 +162,7 @@ function init(){
 		})
 	);
 	scene.add(paddle2);
-	paddle2.position.set(-4, 2.2, -5);
+	paddle2.position.set(-6.5, 2.2, -5);
 
 	ball = new THREE.Mesh(
 		new THREE.SphereGeometry(0.2,10,10),
@@ -179,7 +209,7 @@ function init(){
 	}
 	
 	
-	camera.position.set(1, player.height*6, -10);
+	camera.position.set(0, player.height*8, -10);
 	camera.lookAt(new THREE.Vector3(0,player.height,0));
 	
 	renderer = new THREE.WebGLRenderer();
@@ -189,7 +219,6 @@ function init(){
 	renderer.shadowMap.type = THREE.BasicShadowMap;
 	
 	document.body.appendChild(renderer.domElement);
-	
 	animate();
 }
 
@@ -224,6 +253,8 @@ function onResourcesLoaded(){
 function animate(){
 
 	// Play the loading screen until resources are loaded.
+	
+
 	if( RESOURCES_LOADED == false ){
 		requestAnimationFrame(animate);
 		
@@ -236,11 +267,12 @@ function animate(){
 	}
 
 	requestAnimationFrame(animate);
+
 	
 	// mesh.rotation.x += 0.01;
 	// mesh.rotation.y += 0.02;
 	
-	// Uncomment for absurdity!
+	// // Uncomment for absurdity!
 	// meshes["pirateship"].rotation.z += 0.01;
 	
 	// if(keyboard[87]){ // W key
@@ -266,20 +298,78 @@ function animate(){
 	// if(keyboard[39]){ // right arrow key
 	// 	camera.rotation.y += player.turnSpeed;
 	// }
-	
+
+	// if(Keyboard[87]){
+	// 	paddle1DirX = speed * 0.5;
+	// }
+	update();
+	ballupdate();
 	renderer.render(scene, camera);
 }
 
-function keyDown(event){
-	keyboard[event.keyCode] = true;
+function update(){
+	
+	var moveDistance = 5 * clock.getDelta();
+	if (Key.isDown(Key.D)){
+		if(paddle1.position.z > -6.85){
+			paddle1.translateZ( -moveDistance );
+		}
+	}
+	if (Key.isDown(Key.A)){
+		if(paddle1.position.z < -3.1){
+			paddle1.translateZ(  moveDistance );
+		}
+	}
+
+	if (Key.isDown(Key.J)){
+		if(paddle2.position.z > -6.85){
+			paddle2.translateZ( -moveDistance );
+		}
+	}
+	if (Key.isDown(Key.L)){
+		if(paddle2.position.z < -3.1){
+			paddle2.translateZ(  moveDistance );
+		}
+	}
+
 }
 
-function keyUp(event){
-	keyboard[event.keyCode] = false;
-}
+function ballupdate(){
+	// ball.position.x = 4;
+	// ball.position.z = -4.5;
 
-window.addEventListener('keydown', keyDown);
-window.addEventListener('keyup', keyUp);
+	if (ball.position.z > -2.75){
+		ballDirZ = -ballDirZ;
+	}
+	if (ball.position.z < -7.2){
+		ballDirZ = -ballDirZ;
+	}
+	if (ball.position.x <= paddle1.position.x && ball.position.x >= paddle1.position.x - 0.5){
+		if (ball.position.z <= paddle1.position.z + 0.5 && ball.position.z >= paddle1.position.z - 0.5){	
+			ballDirX = -ballDirX
+			ballDirZ -= paddle1DirZ * 0.7;
+		}
+	}
+
+	if (ball.position.x <= paddle2.position.x && ball.position.x >= paddle2.position.x - 0.5){
+		if (ball.position.z <= paddle2.position.z + 0.5 && ball.position.z >= paddle2.position.z - 0.5){	
+			ballDirX = -ballDirX
+			ballDirZ -= paddle2DirZ * 0.7;
+		}
+	}
+	
+	ball.position.x += ballDirX * speed;
+	ball.position.z += ballDirZ * speed;
+
+	if(ballDirX > speed * 2){
+		ballDirX = speed * 2;
+	}
+	
+	if(ballDirZ > speed * 2){
+		ballDirZ = speed * 2;
+	}
+
+}
 
 window.onload = init;
 
