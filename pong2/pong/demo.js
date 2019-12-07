@@ -4,6 +4,7 @@ var paddle1;
 var crate, crateTexture, crateNormalMap, crateBumpMap;
 
 var speed = 0.15, ballDirX = 1, ballDirZ = 1;
+var score1 = 0, score2 = 0;
 
 window.addEventListener('keyup', function(event) { Key.onKeyup(event); }, false);
 window.addEventListener('keydown', function(event) { Key.onKeydown(event); }, false);
@@ -31,7 +32,6 @@ var Key = {
     delete this._pressed[event.keyCode];
   }
 };
-
 
 var clock = new THREE.Clock();
 var player = { height:1.8, speed:0.2, turnSpeed:Math.PI*0.02 };
@@ -302,39 +302,37 @@ function animate(){
 	// if(Keyboard[87]){
 	// 	paddle1DirX = speed * 0.5;
 	// }
-	update();
-	ballupdate();
+	paddlemove();
+	ballmove();
+	paddleball();
 	renderer.render(scene, camera);
 }
 
-function update(){
-	
+function paddlemove(){
 	var moveDistance = 5 * clock.getDelta();
 	if (Key.isDown(Key.D)){
 		if(paddle1.position.z > -6.85){
-			paddle1.translateZ( -moveDistance );
+			paddle1.translateZ(-moveDistance);
 		}
 	}
-	if (Key.isDown(Key.A)){
+	else if (Key.isDown(Key.A)){
 		if(paddle1.position.z < -3.1){
-			paddle1.translateZ(  moveDistance );
+			paddle1.translateZ(moveDistance);
 		}
 	}
-
 	if (Key.isDown(Key.J)){
 		if(paddle2.position.z > -6.85){
-			paddle2.translateZ( -moveDistance );
+			paddle2.translateZ(-moveDistance);
 		}
 	}
-	if (Key.isDown(Key.L)){
+	else if (Key.isDown(Key.L)){
 		if(paddle2.position.z < -3.1){
-			paddle2.translateZ(  moveDistance );
+			paddle2.translateZ(moveDistance);
 		}
 	}
-
 }
 
-function ballupdate(){
+function ballmove(){
 	// ball.position.x = 4;
 	// ball.position.z = -4.5;
 
@@ -343,19 +341,6 @@ function ballupdate(){
 	}
 	if (ball.position.z < -7.2){
 		ballDirZ = -ballDirZ;
-	}
-	if (ball.position.x <= paddle1.position.x && ball.position.x >= paddle1.position.x - 0.5){
-		if (ball.position.z <= paddle1.position.z + 0.5 && ball.position.z >= paddle1.position.z - 0.5){	
-			ballDirX = -ballDirX
-			ballDirZ -= paddle1DirZ * 0.7;
-		}
-	}
-
-	if (ball.position.x <= paddle2.position.x && ball.position.x >= paddle2.position.x - 0.5){
-		if (ball.position.z <= paddle2.position.z + 0.5 && ball.position.z >= paddle2.position.z - 0.5){	
-			ballDirX = -ballDirX
-			ballDirZ -= paddle2DirZ * 0.7;
-		}
 	}
 	
 	ball.position.x += ballDirX * speed;
@@ -368,8 +353,26 @@ function ballupdate(){
 	if(ballDirZ > speed * 2){
 		ballDirZ = speed * 2;
 	}
-
 }
+
+function paddleball(){
+
+	if (ball.position.x <= paddle1.position.x && ball.position.x >= paddle1.position.x - 0.5){
+		if (ball.position.z <= paddle1.position.z + 0.5 && ball.position.z >= paddle1.position.z - 0.5){	
+			ballDirX = -ballDirX;
+			ballDirZ -= paddle1DirZ * 0.7;
+		}
+	}
+
+	if (ball.position.x <= paddle2.position.x && ball.position.x >= paddle2.position.x - 0.5){
+		if (ball.position.z <= paddle2.position.z + 0.5 && ball.position.z >= paddle2.position.z - 0.5){	
+			ballDirX = -ballDirX;
+			ballDirZ -= paddle2DirZ * 0.7;
+		}
+	}
+}
+
+function reset
 
 window.onload = init;
 
