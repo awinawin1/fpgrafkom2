@@ -72,17 +72,10 @@ var models = {
 // Meshes index
 var meshes = {};
 
-function setup(){
-	init();
-	// animate();
-}
-
 function init(){
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera(90, 1280/720, 0.1, 1000);
 	camera.position.set(0, 0, 0);
-	
-	
 	
 	loadingScreen.box.position.set(0,0,5);
 	loadingScreen.camera.lookAt(loadingScreen.box.position);
@@ -338,6 +331,8 @@ function paddlemove(){
 }
 
 function ballmove(){
+	speed += 0.0002;
+
 	if (ball.position.z > -2.75){
 		ballDirZ = -ballDirZ;
 	}
@@ -367,7 +362,7 @@ function ballmove(){
 		resetball();
 		score2++;
 		document.getElementById("score2").innerHTML = score2;
-		checkscore();l
+		checkscore();
 	}
 
 }
@@ -389,17 +384,20 @@ function paddleball(){
 function resetball(){
 	ball.position.x = -1.3;
 	ball.position.z = -5;
+	speed = 0.15;
 	ballDirZ = 1;
 	ballDirX = -ballDirX;
 }
 
 function checkscore(){
 	if (score1 >= maxscore){
-		speed = 0;
+		ballDirX = 0;
+		ballDirZ = 0;
 		document.getElementById("winner").innerHTML = "Player 1 Wins!";
 	}
 	else if(score2 >= maxscore){
-		speed = 0;
+		ballDirX = 0;
+		ballDirZ = 0;
 		document.getElementById("winner").innerHTML = "Player 2 Wins";
 	}
 }
