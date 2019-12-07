@@ -222,7 +222,8 @@ function init(){
 	renderer.shadowMap.enabled = true;
 	renderer.shadowMap.type = THREE.BasicShadowMap;
 	
-	document.body.appendChild(renderer.domElement);
+	// document.body.appendChild(renderer.domElement);
+	document.getElementById("tengah").appendChild(renderer.domElement);
 	animate();
 }
 
@@ -366,7 +367,7 @@ function ballmove(){
 		resetball();
 		score2++;
 		document.getElementById("score2").innerHTML = score2;
-		checkscore();
+		checkscore();l
 	}
 
 }
