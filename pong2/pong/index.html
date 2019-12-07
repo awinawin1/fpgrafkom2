@@ -1,23 +1,106 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Demo 07</title>
+		<title>GAME-Pong</title>
 		<script type="text/javascript" src="../three.min.js" ></script>
 		<script type="text/javascript" src="../MTLLoader.js" ></script>
 		<script type="text/javascript" src="../OBJLoader.js" ></script>
+			<style>
+				.card {
+					box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+					transition: 0.3s;
+					width: 40%;
+				}
+
+				.card:hover {
+					box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+				}
+
+				.container {
+					padding: 2px 16px;
+				}
+				#papan1{
+					float: left;
+					margin-left:50px;
+					color: white;
+				}
+				#howto1{
+					float: left;
+				}
+				#howto2{
+					float: right;
+				}
+				#papan2{
+					float: right; 
+					margin-right:50px;
+					color: white;
+				}
+				#score1{
+					float: left;
+					margin-left:50px;
+					color: white;
+
+				}
+				#score2{
+					float: right; 
+					margin-right:50px;
+					color: white;
+				}
+				#winner{
+					color:white;
+					font-size: 40px;
+				}
+				.button {
+					background-color: #82653b; 
+					border: none;
+					color: black;
+					padding: 20px;
+					text-align: center;
+					text-decoration: none;
+					display: inline-block;
+					font-size: 16px;
+					margin: 4px 2px;
+					cursor: pointer;
+					border-radius: 12px;
+				}
+			</style>
 	</head>
-	<body style="text-align:center; background-color: blue;">
+	<body style= "background-color: black;">
 		<div>
+		<div class ="header">
+
 			<div id="tombol">
-				<button class="button" onclick="init()" style="text-align: left;">Start</button>
+				
+				<center><button class="button" onclick="init()" style="text-align: left;">Start</button></center>
 			</div>
+		</div>	
 			<div id="canvas">
-				<div id="score1" style="float: left; margin-left:50px;">0</div>
-				<div id="score2" style="float: right; margin-right:50px;">0</div>
+			
+				<div id="papan1">
+				<div id ="howto1">
+				
+					<p>A - move Up</p>
+					<p>D - move Down</p>
+				</div>
+				<br>
+					<h2>Score Player 1</h2>
+					<div id="score1">0</div>
+				
+				</div>
+				<div id="papan2">
+				<div id ="howto2">
+					<p>L - move Up</p>
+					<p>J - move Down</p>
+				</div>
+				<br>
+					<h2>Score Player 2</h2>
+					<div id="score2">0</div>
+				</div>
+				
 				<div id="tengah"><script type="text/javascript" src="demo.js"></script></div>
 			</div>
 		</div>
-		<div id="winner">Test</div>
+		<center><div id="winner">---</div></center>
 
 	</body>
 </html>
