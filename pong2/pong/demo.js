@@ -65,7 +65,28 @@ var models = {
 		obj:"models/Pirateship.obj",
 		mtl:"models/Pirateship.mtl",
 		mesh: null
-	}
+	},
+	star:{
+		obj:"models/star.obj",
+		mtl:"models/star.mtl",
+		mesh: null
+	},
+	star1:{
+		obj:"models/star1.obj",
+		mtl:"models/star1.mtl",
+		mesh: null
+	},
+	star2:{
+		obj:"models/star2.obj",
+		mtl:"models/star2.mtl",
+		mesh: null
+	},
+	moon:{
+		obj:"models/moon.obj",
+		mtl:"models/moon.mtl",
+		mesh: null
+	},
+
 };
 
 
@@ -229,6 +250,10 @@ function onResourcesLoaded(){
 	meshes["campfire1"] = models.campfire.mesh.clone();
 	meshes["campfire2"] = models.campfire.mesh.clone();
 	meshes["pirateship"] = models.pirateship.mesh.clone();
+	meshes["star"] = models.star.mesh.clone();
+	meshes["star1"] = models.star.mesh.clone();
+	meshes["star2"] = models.star.mesh.clone();
+	meshes["moon"] = models.star.mesh.clone();
 	
 	// Reposition individual meshes, then add meshes to scene
 	meshes["tent1"].position.set(-5, 0, 4);
@@ -239,10 +264,19 @@ function onResourcesLoaded(){
 	
 	meshes["campfire1"].position.set(-5, 0, 1);
 	meshes["campfire2"].position.set(-8, 0, 1);
+
+	meshes["star"].position.set(-4,10,9);
+	meshes["star1"].position.set(4,9,8);
+	meshes["star2"].position.set(-15,9,10);
+	meshes["moon"].position.set(-15,9,12);
 	
 	scene.add(meshes["campfire1"]);
 	scene.add(meshes["campfire2"]);
-	
+	scene.add(meshes["star"]);
+	scene.add(meshes["star1"]);
+	scene.add(meshes["star2"]);
+	scene.add(meshes["moon"]);
+
 	meshes["pirateship"].position.set(-11, -1, 1);
 	meshes["pirateship"].rotation.set(0, Math.PI, 0); // Rotate it to face the other way.
 	scene.add(meshes["pirateship"]);
@@ -401,4 +435,3 @@ function checkscore(){
 		document.getElementById("winner").innerHTML = "Player 2 Wins";
 	}
 }
-
