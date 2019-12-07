@@ -48,58 +48,50 @@
 				}
 				#winner{
 					color:white;
-					font-size: 40px;
+					font-size: 36px;
 				}
 				.button {
 					background-color: #82653b; 
 					border: none;
 					color: black;
-					padding: 20px;
+					padding: 10px;
 					text-align: center;
 					text-decoration: none;
 					display: inline-block;
-					font-size: 16px;
+					font-size: 14px;
 					margin: 4px 2px;
 					cursor: pointer;
 					border-radius: 12px;
 				}
 			</style>
 	</head>
-	<body style= "background-color: black;">
-		<div>
+	<body style="background-color:black;">
 		<div class ="header">
-
-			<div id="tombol">
-				
+			<div id="tombol">	
 				<center><button class="button" onclick="init()" style="text-align: left;">Start</button></center>
 			</div>
 		</div>	
 			<div id="canvas">
-			
 				<div id="papan1">
-				<div id ="howto1">
-				
-					<p>A - move Up</p>
-					<p>D - move Down</p>
-				</div>
-				<br>
-					<h2>Score Player 1</h2>
-					<div id="score1">0</div>
-				
+					<div id ="howto1">				
+						<p>A - move Up</p>
+						<p>D - move Down</p>
+					</div>
+					<br>
+						<p>Score Player 1</p>
+						<div id="score1">0</div>				
 				</div>
 				<div id="papan2">
-				<div id ="howto2">
-					<p>L - move Up</p>
-					<p>J - move Down</p>
-				</div>
-				<br>
-					<h2>Score Player 2</h2>
-					<div id="score2">0</div>
-				</div>
-				
+					<div id ="howto2">
+						<p>L - move Up</p>
+						<p>J - move Down</p>
+					</div>
+					<br>
+						<p>Score Player 2</p>
+						<div id="score2">0</div>
+				</div>				
 				<div id="tengah"><script type="text/javascript" src="demo.js"></script></div>
 			</div>
-		</div>
 		<center><div id="winner">---</div></center>
 
 	</body>
