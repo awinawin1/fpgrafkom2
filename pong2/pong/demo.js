@@ -51,19 +51,15 @@ var RESOURCES_LOADED = false;
 
 // Models index
 var models = {
-	tent: {
-		obj:"models/Tent_Poles_01.obj",
-		mtl:"models/Tent_Poles_01.mtl",
+
+	tree1: {
+		obj:"models/tree1.obj",
+		mtl:"models/tree1.mtl",
 		mesh: null
 	},
-	campfire: {
-		obj:"models/Campfire_01.obj",
-		mtl:"models/Campfire_01.mtl",
-		mesh: null
-	},
-	pirateship: {
-		obj:"models/Pirateship.obj",
-		mtl:"models/Pirateship.mtl",
+	tree2: {
+		obj:"models/tree2.obj",
+		mtl:"models/tree2.mtl",
 		mesh: null
 	},
 	star:{
@@ -84,6 +80,11 @@ var models = {
 	moon:{
 		obj:"models/moon.obj",
 		mtl:"models/moon.mtl",
+		mesh: null
+	},
+	batang1:{
+		obj:"models/batang1.obj",
+		mtl:"models/batang1.mtl",
 		mesh: null
 	},
 
@@ -245,41 +246,32 @@ function init(){
 function onResourcesLoaded(){
 	
 	// Clone models into meshes.
-	meshes["tent1"] = models.tent.mesh.clone();
-	meshes["tent2"] = models.tent.mesh.clone();
-	meshes["campfire1"] = models.campfire.mesh.clone();
-	meshes["campfire2"] = models.campfire.mesh.clone();
-	meshes["pirateship"] = models.pirateship.mesh.clone();
+
+	meshes["tree1"] = models.tree1.mesh.clone();
+	meshes["tree2"] = models.tree2.mesh.clone();
 	meshes["star"] = models.star.mesh.clone();
 	meshes["star1"] = models.star.mesh.clone();
 	meshes["star2"] = models.star.mesh.clone();
-	meshes["moon"] = models.star.mesh.clone();
+	meshes["moon"] = models.moon.mesh.clone();
+	meshes["batang1"] = models.batang1.mesh.clone();
 	
-	// Reposition individual meshes, then add meshes to scene
-	meshes["tent1"].position.set(-5, 0, 4);
-	scene.add(meshes["tent1"]);
-	
-	meshes["tent2"].position.set(-8, 0, 4);
-	scene.add(meshes["tent2"]);
-	
-	meshes["campfire1"].position.set(-5, 0, 1);
-	meshes["campfire2"].position.set(-8, 0, 1);
+	// Reposition individual meshes, then add meshes to scene	
 
-	meshes["star"].position.set(-4,10,9);
-	meshes["star1"].position.set(4,9,8);
-	meshes["star2"].position.set(-15,9,10);
-	meshes["moon"].position.set(-15,9,12);
+	meshes["star"].position.set(-4,10,20);
+	meshes["star1"].position.set(-5,10,5);
+	meshes["star2"].position.set(-15,9,20);
+	meshes["moon"].position.set(-12,10,20);
+	meshes["tree1"].position.set(-4,6,5);
+	meshes["tree2"].position.set(-1,5,3);
+	meshes["batang1"].position.set(2,2,2);
 	
-	scene.add(meshes["campfire1"]);
-	scene.add(meshes["campfire2"]);
-	scene.add(meshes["star"]);
+	scene.add(meshes["tree1"]);
+	scene.add(meshes["tree2"]);
 	scene.add(meshes["star1"]);
 	scene.add(meshes["star2"]);
 	scene.add(meshes["moon"]);
-
-	meshes["pirateship"].position.set(-11, -1, 1);
-	meshes["pirateship"].rotation.set(0, Math.PI, 0); // Rotate it to face the other way.
-	scene.add(meshes["pirateship"]);
+	scene.add(meshes["star"]);
+	//scene.add(meshes["batang1"]);
 }
 
 function animate(){
