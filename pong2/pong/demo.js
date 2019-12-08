@@ -77,16 +77,52 @@ var models = {
 		mtl:"models/star2.mtl",
 		mesh: null
 	},
+	star3:{
+		obj:"models/star2.obj",
+		mtl:"models/star2.mtl",
+		mesh: null
+	},
+	star4:{
+		obj:"models/star2.obj",
+		mtl:"models/star2.mtl",
+		mesh: null
+	},
+	star5:{
+		obj:"models/star2.obj",
+		mtl:"models/star2.mtl",
+		mesh: null
+	},
 	moon:{
 		obj:"models/moon.obj",
 		mtl:"models/moon.mtl",
 		mesh: null
 	},
 	batang1:{
-		obj:"models/batang1.obj",
-		mtl:"models/batang1.mtl",
+		obj:"models/tree2.obj",
+		mtl:"models/tree2.mtl",
 		mesh: null
 	},
+	batang2:{
+		obj:"models/tree1.obj",
+		mtl:"models/tree1.mtl",
+		mesh: null
+	},
+	batang3:{
+		obj:"models/tree1.obj",
+		mtl:"models/tree1.mtl",
+		mesh: null
+	},
+	tree3:{
+		obj:"models/tree2.obj",
+		mtl:"models/tree2.mtl",
+		mesh: null
+	},
+	tree4:{
+		obj:"models/tree2.obj",
+		mtl:"models/tree2.mtl",
+		mesh: null
+	},
+
 
 };
 
@@ -165,7 +201,7 @@ function init(){
 	paddle1 = new THREE.Mesh(
 		new THREE.BoxGeometry(0.5,0.5,1.2),
 		new THREE.MeshPhongMaterial({
-			color:0x87CEFA,
+			color:0xc68c53,
 			
 		})
 	);
@@ -176,7 +212,7 @@ function init(){
 	paddle2 = new THREE.Mesh(
 		new THREE.BoxGeometry(0.5,0.5,1.2),
 		new THREE.MeshPhongMaterial({
-			color:0x87CEFA,
+			color:0x996633,
 			
 		})
 	);
@@ -186,7 +222,7 @@ function init(){
 	ball = new THREE.Mesh(
 		new THREE.SphereGeometry(0.2,10,10),
 		new THREE.MeshPhongMaterial({
-			color:0x87CEFA,
+			color:0x331a00,
 			
 		})
 	);
@@ -249,29 +285,51 @@ function onResourcesLoaded(){
 
 	meshes["tree1"] = models.tree1.mesh.clone();
 	meshes["tree2"] = models.tree2.mesh.clone();
+	meshes["tree3"] = models.tree2.mesh.clone();
+	meshes["tree4"] = models.tree2.mesh.clone();
 	meshes["star"] = models.star.mesh.clone();
 	meshes["star1"] = models.star.mesh.clone();
 	meshes["star2"] = models.star.mesh.clone();
+	meshes["star3"] = models.star2.mesh.clone();
+	meshes["star4"] = models.star2.mesh.clone();
+	meshes["star5"] = models.star2.mesh.clone();
 	meshes["moon"] = models.moon.mesh.clone();
-	meshes["batang1"] = models.batang1.mesh.clone();
+	meshes["batang1"] = models.tree2.mesh.clone();
+	meshes["batang2"] = models.tree1.mesh.clone();
+	meshes["batang3"] = models.tree1.mesh.clone();
 	
 	// Reposition individual meshes, then add meshes to scene	
 
 	meshes["star"].position.set(-4,10,20);
 	meshes["star1"].position.set(-5,10,5);
 	meshes["star2"].position.set(-15,9,20);
+	meshes["star3"].position.set(2,10.5,2);
+	meshes["star4"].position.set(12,10,2);
+	meshes["star5"].position.set(11,10.5,2);
 	meshes["moon"].position.set(-12,10,20);
 	meshes["tree1"].position.set(-4,6,5);
 	meshes["tree2"].position.set(-1,5,3);
-	meshes["batang1"].position.set(2,2,2);
+	meshes["tree3"].position.set(3,2,4);
+	meshes["batang1"].position.set(7,2,6);
+	meshes["batang3"].position.set(6,3,6);
+	meshes["batang3"].position.set(2,3,6);
+
+	meshes["batang2"].position.set(8,5,2);
 	
 	scene.add(meshes["tree1"]);
 	scene.add(meshes["tree2"]);
+	scene.add(meshes["tree3"]);
+	scene.add(meshes["tree3"]);
 	scene.add(meshes["star1"]);
 	scene.add(meshes["star2"]);
+	scene.add(meshes["star3"]);
+	scene.add(meshes["star4"]);
+	scene.add(meshes["star5"]);
 	scene.add(meshes["moon"]);
 	scene.add(meshes["star"]);
-	//scene.add(meshes["batang1"]);
+	scene.add(meshes["batang3"]);
+	scene.add(meshes["batang1"]);
+	scene.add(meshes["batang2"]);
 }
 
 function animate(){

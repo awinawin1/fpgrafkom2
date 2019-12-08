@@ -21,34 +21,42 @@
 				}
 				#papan1{
 					float: left;
-					margin-left:50px;
+					margin-left:40px;
 					color: white;
 				}
 				#howto1{
 					float: left;
+					
 				}
 				#howto2{
 					float: right;
 				}
 				#papan2{
 					float: right; 
-					margin-right:50px;
+					margin-right:40px;
 					color: white;
+					
 				}
 				#score1{
 					float: left;
-					margin-left:50px;
+					margin-left:40px;
 					color: white;
+					font-size: 30px;
+					border: 2px solid #bf8040;
+					padding: 5px;
 
 				}
 				#score2{
 					float: right; 
-					margin-right:50px;
+					margin-right:40px;
+					font-size: 30px;
 					color: white;
+					border: 2px solid #bf8040;
+					padding: 5px;
 				}
 				#winner{
-					color:white;
-					font-size: 36px;
+					color:#d2a679;
+					font-size: 20px;
 				}
 				.button {
 					background-color: #82653b; 
@@ -59,7 +67,7 @@
 					text-decoration: none;
 					display: inline-block;
 					font-size: 14px;
-					margin: 4px 2px;
+					/* margin: 4px 2px; */
 					cursor: pointer;
 					border-radius: 12px;
 				}
@@ -75,24 +83,32 @@
 				<div id="papan1">
 					<div id ="howto1">				
 						<p>A - move Up</p>
-						<p>D - move Down</p>
+						<p class="dotted">D - move Down</p>
+						<br>
 					</div>
 					<br>
 						<p>Score Player 1</p>
-						<div id="score1">0</div>				
+						<div id="score1">0</div>
+						<br>
+						<br>
+						
 				</div>
 				<div id="papan2">
 					<div id ="howto2">
 						<p>L - move Up</p>
 						<p>J - move Down</p>
+						<br>
 					</div>
 					<br>
 						<p>Score Player 2</p>
 						<div id="score2">0</div>
+						<br>
+						<br>
+						
 				</div>				
 				<div id="tengah"><script type="text/javascript" src="demo.js"></script></div>
-			</div>
-		<center><div id="winner">---</div></center>
+			</div> <center><div id="winner">---</div></center>
+		
 
 	</body>
 </html>
