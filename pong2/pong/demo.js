@@ -174,8 +174,6 @@ function init(){
 	light = new THREE.PointLight(0xffffff, 0.8, 18);
 	light.position.set(-3,6,-3);
 	light.castShadow = true;
-	light.shadow.camera.near = 0.1;
-	light.shadow.camera.far = 25;
 	scene.add(light);
 	
 	
@@ -350,40 +348,15 @@ function animate(){
 
 	requestAnimationFrame(animate);
 
+	meshes["star4"].rotation.y += 0.02;
+	meshes["star3"].rotation.y += 0.01;
+	meshes["star2"].rotation.y += 0.01;
+	meshes["star1"].rotation.y += 0.01;
+	meshes["star5"].rotation.y += 0.05;
+	meshes["star"].rotation.y += 0.01;
 	
-	// mesh.rotation.x += 0.01;
-	// mesh.rotation.y += 0.02;
-	
-	// // Uncomment for absurdity!
-	// meshes["pirateship"].rotation.z += 0.01;
-	
-	// if(keyboard[87]){ // W key
-	// 	camera.position.x -= Math.sin(camera.rotation.y) * player.speed;
-	// 	camera.position.z -= -Math.cos(camera.rotation.y) * player.speed;
-	// }
-	// if(keyboard[83]){ // S key
-	// 	camera.position.x += Math.sin(camera.rotation.y) * player.speed;
-	// 	camera.position.z += -Math.cos(camera.rotation.y) * player.speed;
-	// }
-	// if(keyboard[65]){ // A key
-	// 	camera.position.x += Math.sin(camera.rotation.y + Math.PI/2) * player.speed;
-	// 	camera.position.z += -Math.cos(camera.rotation.y + Math.PI/2) * player.speed;
-	// }
-	// if(keyboard[68]){ // D key
-	// 	camera.position.x += Math.sin(camera.rotation.y - Math.PI/2) * player.speed;
-	// 	camera.position.z += -Math.cos(camera.rotation.y - Math.PI/2) * player.speed;
-	// }
-	
-	// if(keyboard[37]){ // left arrow key
-	// 	camera.rotation.y -= player.turnSpeed;
-	// }
-	// if(keyboard[39]){ // right arrow key
-	// 	camera.rotation.y += player.turnSpeed;
-	// }
 
-	// if(Keyboard[87]){
-	// 	paddle1DirX = speed * 0.5;
-	// }
+
 	paddlemove();
 	ballmove();
 	paddleball();
